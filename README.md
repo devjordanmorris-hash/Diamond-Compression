@@ -17,7 +17,7 @@ This is an experimental research prototype. The implementation is intended for e
 
 ## License
 
-Free to use, modify, and integrate under the repository license.
+MIT License — see LICENSE file.
 
 # Diamond Compression
 
