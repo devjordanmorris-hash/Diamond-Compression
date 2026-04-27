@@ -1,4 +1,18 @@
-Diamond Codec + thermal fingerprinting - Useful feature extractor for ai reaserch pipelines free to use and modify.
+Diamond Codec + thermal fingerprinting - Useful feature extractor for ai research pipelines free to use and modify.    See LICENSE” or add MIT/Apache-2.0       Requirements: Swift, Metal, macOS.
+
+## Status
+
+This is an experimental research prototype. The implementation is intended for exploration, benchmarking, and collaboration rather than production use.
+
+## License
+
+Free to use, modify, and integrate under the repository license.
+
+# Diamond Compression
+
+**A bucketed, path-based predictive image representation with compact residual encoding and thermal fingerprinting.**
+
+Experimental research prototype for image compression, feature extraction, and fast structural similarity matching.
 
 A Bucketed, Path-Based Predictive Image Representation with Compact Residual Encoding
 
