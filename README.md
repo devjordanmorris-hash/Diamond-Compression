@@ -1,4 +1,4 @@
-Diamond Codec
+Diamond Codec + thermal fingerprinting - Useful feature extractor for ai reaserch pipelines free to use and modify.
 
 A Bucketed, Path-Based Predictive Image Representation with Compact Residual Encoding
 
@@ -230,6 +230,202 @@ Its strength lies in:
 combining structure, locality, and computational efficiency
 
 ⸻
+
+Thermal Fingerprinting
+
+Compact Structural Image Descriptor for Fast Similarity Matching
+
+⸻
+
+Overview
+
+Thermal Fingerprinting is a lightweight image descriptor that encodes global and local structure into a fixed 64-bit representation.
+
+The method is designed for:
+
+* fast image similarity search
+* dataset deduplication
+* approximate visual matching
+* GPU-accelerated retrieval
+
+It provides a balance between:
+
+compactness, interpretability, and computational efficiency
+
+⸻
+
+Core Idea
+
+An image is divided into a 4 × 4 grid (16 tiles).
+
+Each tile contributes a 4-bit descriptor capturing:
+
+* relative intensity
+* local contrast
+* dominant structural direction
+
+Total:16 tiles × 4 bits = 64-bit fingerprint
+Tile Encoding
+
+Each tile produces a 4-bit value: 
+[ direction | contrast | intensity (2 bits) ]
+
+Bit Breakdown
+
+* Bits 0–1 (Intensity Band)
+    Quantised relative to global image average
+* Bit 2 (Contrast Flag)
+    Indicates high local variation within the tile
+* Bit 3 (Direction Flag)
+    Captures dominant structural bias:
+    * diagonal (top-left vs bottom-right)
+    * or axial (horizontal / vertical)
+
+⸻
+
+Feature Extraction
+
+For each tile, the following are computed:
+
+* average luminance
+* minimum / maximum luminance
+* directional energy:
+    * diagonal split
+    * horizontal split
+    * vertical split
+
+The strongest directional signal is selected to form the direction flag.
+
+⸻
+
+Global Normalisation
+
+A global luminance average is computed across the entire image.
+
+Tile intensities are expressed relative to this average to ensure:
+
+* consistency across images
+* robustness to brightness shifts
+
+⸻
+
+GPU Acceleration
+
+Thermal Fingerprinting is designed for GPU execution using Metal.
+
+Processing Stages
+
+1. Global Reduction
+    * computes total luminance
+    * derives global average
+2. Tile Statistics
+    * computes per-tile features:
+        * intensity
+        * contrast
+        * directional energy
+3. Fingerprint Packing
+    * converts tile data into a 64-bit descriptor
+
+⸻
+
+Matching
+
+Similarity between fingerprints is computed per tile:
+score = band similarity + contrast match + direction match
+
+Where:
+
+* band similarity is distance-based
+* contrast and direction are binary matches
+
+Total score is summed across all 16 tiles.
+
+⸻
+
+Properties
+
+Compactness
+
+* fixed 64-bit representation
+* constant memory footprint
+
+Speed
+
+* fast integer operations
+* GPU-parallel matching
+
+Interpretability
+
+* each bit has a clear meaning
+* structure-aware descriptor
+
+⸻
+
+Use Cases
+
+* large-scale image indexing
+* near-duplicate detection
+* content-based retrieval
+* fast filtering before heavier models
+* hybrid pipelines (pre-ML filtering)
+
+⸻
+
+Advantages
+
+* extremely compact descriptor
+* fast similarity scoring
+* captures structural information
+* robust to minor noise and variation
+* GPU-friendly design
+
+⸻
+
+Limitations
+
+* coarse spatial resolution (4×4 grid)
+* not fully invariant to rotation/scale
+* may miss fine-grained texture differences
+
+⸻
+
+Future Work
+
+* rotation and scale invariance
+* adaptive tile layouts
+* multi-scale fingerprints
+* integration with learned features
+* tighter coupling with Diamond representations
+
+⸻
+
+License
+
+Free to use, modify, and integrate.
+
+⸻
+
+Notes
+
+Thermal Fingerprinting is intended as a:
+
+fast, first-pass structural similarity filter
+
+It complements—not replaces—more detailed analysis methods.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Contact
 
