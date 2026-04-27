@@ -1,4 +1,15 @@
-Diamond Codec + thermal fingerprinting - Useful feature extractor for ai research pipelines free to use and modify.    See LICENSE” or add MIT/Apache-2.0       Requirements: Swift, Metal, macOS.
+# Diamond Compression
+
+**A structured image representation and feature extraction system combining path-based compression and 64-bit thermal fingerprinting.**
+
+Why it matters: This approach focuses on **structured, interpretable representations** rather than purely statistical compression, making it suitable for hybrid classical + ML pipelines.
+
+Designed for:
+- fast preprocessing in AI pipelines  
+- compact structural feature extraction  
+- efficient large-scale image matching  
+
+> Experimental research prototype — intended for exploration, benchmarking, and collaboration.
 
 ## Status
 
